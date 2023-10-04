@@ -98,6 +98,9 @@
         <input type="text" placeholder="Имя" id="user_name">
         <input type="text" placeholder="Email" id="user_email">
         <input type="text" placeholder="Телефон" id="user_phone">
+// ещё перед тремя летами приписать присвоение еррору пустого текста
+        <div id="error"></div>
+
         <button id="order">Оформить</button>
     </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -107,15 +110,46 @@
         // переменные ссылаться на кнопки в документе
         let buy = document.getElementById("buy");
         let order = document.getElementById("order");
+        
+        tg.expand(); //фулскрин и устраняет ошибку отображения на мобилках
+
 // обработчик события? анонимная функция. объект мейн должен прятаться а форм показываться (изначально спрятана)
         buy.addEventListener("click", () => {
             document.getElementById("main").style.display = "none";
             document.getElementById("form").style.display = "block";
             // все эти знаяения прописаны в документации. это получение имени из тг и вставление сразу в поле
             document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name
-        });
+        }); // получение данных юзера и подставление их в форму происходит только при инлайн киборд маркап
+        // а реплай киборд маркап такого не даёт
 
         order.addEventListener("click", () => {
+            // а теперь отправлять данные из приложения обратно в бота
+            document.getElementById("error").innerText = ''
+
+            let name = document.getElementById("user_name").value;
+            let email = document.getElementById("user_email").value;
+            let phone = document.getElementById("user_phone").value;
+            // по желанию добавить проверки создать выше объект эррор туда вписывать ошибка и ретюрн выход из функции
+            if(name.length < 2) {
+                document.getElementById("error").innerText = "Слишком короткое имя";
+                return;
+            }
+            if(email.length < 5) {
+                document.getElementById("error").innerText = "Слишком короткий email";
+                return;
+            }
+            if(phone.length < 10) {
+                document.getElementById("error").innerText = "Слишком короткий телефон";
+                return;
+            }
+// он меня заебал давайте я массив создам давайте я джсон объект создам
+            let data = { // типа словарь ключ это значения бля на что я жизнь трачу
+                name: name,
+                email: email,
+                phone: phone
+            }
+            tg.sendData(JSON.stringify(data));
+
             tg.close();
         });
     </script>
