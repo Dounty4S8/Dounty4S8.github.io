@@ -59,6 +59,25 @@
         button:hover {
             background: var(--tg-theme-secondary-bg-color);
         }
+
+        #form {
+            display: none;
+            text-align: center
+        }
+
+        input {
+            width: 90%;
+            outline: none;
+            margin: 10px 15%;
+            padding: 15px 10px;
+            font-size: 14px;
+            border: 4px solid silver;
+            border-radius: 8px;
+        }
+
+        input:focus {
+            border-color:rgba(197, 0, 115, 0.678);
+        }
     </style>
 </head>
 <body>
@@ -75,7 +94,30 @@
 далее этот УЙОБАК ещё изменяет файл, а именно лезет на сайт телеграма в документацию веб приложений где
 описана какая-то хуйня и сиэсэс стили, оттуда надо скопировать ссылку на подключение поддержки приложений
 к хтмл файлу а потом ещё ПРЯМ ЗДЕСЬ ПРОПИСЫВАЕТ СИЭСЭС СТИЛИ НИХУЯ  -->
+    <form id="form">
+        <input type="text" placeholder="Имя" id="user_name">
+        <input type="text" placeholder="Email" id="user_email">
+        <input type="text" placeholder="Телефон" id="user_phone">
+        <button id="order">Оформить</button>
+    </form>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+// ну вощем создаём пользовательский функционал так шобы он взаиводействовал с апи телеграма
+        let tg = window.Telegram.WebApp;
+        // переменные ссылаться на кнопки в документе
+        let buy = document.getElementById("buy");
+        let order = document.getElementById("order");
+// обработчик события? анонимная функция. объект мейн должен прятаться а форм показываться (изначально спрятана)
+        buy.addEventListener("click", () => {
+            document.getElementById("main").style.display = "none";
+            document.getElementById("form").style.display = "block";
+            // все эти знаяения прописаны в документации. это получение имени из тг и вставление сразу в поле
+            document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name
+        });
 
+        order.addEventListener("click", () => {
+            tg.close();
+        });
+    </script>
 </body>
 </html>
