@@ -4,7 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- это я дописал -->
-    <title>Document</title>
+    <title>Document</title> <!--под этим можно линкнуть с55 документ либо здесь же под титлом тег стайл и прописывать сиэсэс-->
+    <style>
+        /* тут можно импортнуть гугл шрифт */
+        * {
+            margin: 0;
+            paddinf: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:'Courier New', Courier, monospace;
+            font-weight: 200;
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-bg-color);
+            /* с сайта документации телеги копируем и вставляем, это цвета те что у юзера поставлены в тг */
+        }
+
+        #main {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 70px;
+            margin: 30px auto;
+        }
+
+        p {
+            width: 350px;
+            margin 0 auto;
+        }
+
+        button {
+            border: 0;
+            border-radius: 5px;
+            margin-top: 50px;
+            height: 60px;
+            width: 200px;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 500ms ease;
+            color: var(--tg-theme-button-color);
+            background: var(--tg-theme-button-text-color);
+        }
+
+        button:hover {
+            background: var(--tg-theme-secondary-bg-color);
+        }
+    </style>
 </head>
 <body>
     <div id="main">
@@ -15,6 +70,12 @@
     </div>
     <!-- он нам предлагает на сервер выгрузить (локальный не подойдёт) и если нет сайта своего выгрузить на гитхаб
     он говорит "в корневую папку вебсайта выгрузить этот файл (собственного сайта)"
-    либо "конкретно только эту одну страницу на гитхаб репозиторий" -->
+    либо "конкретно только эту одну страницу на гитхаб репозиторий"
+гит это мегасложно но само получилось и картинка почему-то не отображается
+далее этот УЙОБАК ещё изменяет файл, а именно лезет на сайт телеграма в документацию веб приложений где
+описана какая-то хуйня и сиэсэс стили, оттуда надо скопировать ссылку на подключение поддержки приложений
+к хтмл файлу а потом ещё ПРЯМ ЗДЕСЬ ПРОПИСЫВАЕТ СИЭСЭС СТИЛИ НИХУЯ  -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
 </body>
 </html>
